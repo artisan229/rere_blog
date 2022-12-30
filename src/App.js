@@ -8,17 +8,26 @@ function App() {
   const [post, setPost] = useState(['남자 코트 추천', 'Rust 독학', '강남 우동 맛집']);
   const [like, setLike] = useState(0)
 
-  const changeLike = event => {
+  const changeLike = () => {
     setLike(like + 1)
+  }
+
+  const sortPost = () => {
+    const copy = [...post]; // deep copy
+    copy.sort();
+    setPost(copy)
   }
 
   return (
     <div className="App">
       <div className="black-nav">
-        <h4 style={{color: 'red'}}>{title}</h4>
+        <h4>{title}</h4>
       </div>
+      <button onClick={sortPost}>정렬</button>
       <div className="list">
-        <h4>{post[0]} <span onClick={changeLike}>👍</span>{like}</h4>
+        <h4>{post[0]}
+          <span onClick={changeLike}>👍</span>{like}
+        </h4>
         <p>2월 17일 발행</p>
       </div>
       <div className="list">
