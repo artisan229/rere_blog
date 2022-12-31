@@ -4,9 +4,10 @@ import './App.css';
 
 function App() {
 
-  const title = '강남 우동 맛집';
+  const title = 'ReactBlog';
   const [post, setPost] = useState(['남자 코트 추천', 'Rust 독학', '강남 우동 맛집']);
-  const [like, setLike] = useState(0)
+  const [like, setLike] = useState(0);
+  const [modal, setModal] = useState(false);
 
   const changeLike = () => {
     setLike(like + 1)
@@ -38,8 +39,12 @@ function App() {
         <h4>{post[2]}</h4>
         <p>2월 19일 발행</p>
       </div>
-
-      <Modal />
+      <button onClick={()=>{setModal(!modal)}}>모달창</button>
+      {
+        modal == true ? 
+        <Modal /> : 
+        null
+      }
     </div>
   );
 }
