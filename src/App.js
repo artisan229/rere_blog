@@ -1,4 +1,4 @@
-/*eslint-disable*/
+
 import { useState } from 'react';
 import './App.css';
 
@@ -6,12 +6,8 @@ function App() {
 
   const title = 'ReactBlog';
   const [post, setPost] = useState(['남자 코트 추천', 'Rust 독학', '강남 우동 맛집']);
-  const [like, setLike] = useState(0);
+  const [like, setLike] = useState([0, 0, 0]);
   const [modal, setModal] = useState(false);
-
-  const changeLike = () => {
-    setLike(like + 1)
-  }
 
   const sortPost = () => {
     const copy = [...post]; // deep copy
@@ -25,25 +21,25 @@ function App() {
         <h4>{title}</h4>
       </div>
       <button onClick={sortPost}>정렬</button>
-      <div className="list">
-        <h4>{post[0]}
-          <span onClick={changeLike}>👍</span>{like}
-        </h4>
-        <p>2월 17일 발행</p>
-      </div>
-      <div className="list">
-        <h4>{post[1]}</h4>
-        <p>2월 18일 발행</p>
-      </div>
-      <div className="list">
-        <h4>{post[2]}</h4>
-        <p>2월 19일 발행</p>
-      </div>
-      <button onClick={()=>{setModal(!modal)}}>모달창</button>
       {
-        modal == true ? 
-        <Modal /> : 
-        null
+        post.map((t, i) => {
+          return (
+            <div className="list">
+              <h4>{t} <span onClick={() => {
+                const copy = [...like];
+                copy[i] = copy[i] + 1;
+                setLike(copy)
+              }}>따봉 👍 {like[i]}</span></h4>
+              <p>2월 19일 발행</p>
+            </div>
+          );
+        })
+      }
+      <button onClick={() => { setModal(!modal) }}>모달창</button>
+      {
+        modal === true ?
+          <Modal /> :
+          null
       }
     </div>
   );
